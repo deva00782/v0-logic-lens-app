@@ -251,7 +251,7 @@ export default function AnalyzePage() {
                   </div>
 
                   {/* Suggestions */}
-                  <Card className="p-6 border-indigo-500/20">
+                  <Card className="p-6 border-indigo-500/20 bg-slate-900/60">
                     <h3 className="text-lg font-semibold text-white mb-4">
                       Recommendations
                     </h3>
@@ -259,7 +259,7 @@ export default function AnalyzePage() {
                       {result.suggestions.map((suggestion, idx) => (
                         <li
                           key={idx}
-                          className="flex gap-3 text-gray-300"
+                          className="flex gap-3 text-slate-200"
                         >
                           <span className="text-cyan-400 font-bold">→</span>
                           <span>{suggestion}</span>
@@ -315,7 +315,7 @@ export default function AnalyzePage() {
             </Button>
 
             {similarity !== null && (
-              <Card className="p-6 border-indigo-500/20 animate-in fade-in">
+              <Card className="p-6 border-indigo-500/20 bg-slate-900/60 animate-in fade-in">
                 <div className="text-center space-y-4">
                   <h3 className="text-lg font-semibold text-white">
                     Similarity Score
@@ -348,10 +348,10 @@ export default function AnalyzePage() {
                       <span className="text-4xl font-bold text-cyan-400">
                         {similarity}
                       </span>
-                      <span className="text-gray-400">%</span>
+                      <span className="text-slate-300">%</span>
                     </div>
                   </div>
-                  <p className="text-gray-400">
+                  <p className="text-slate-200">
                     {similarity > 80
                       ? "Files are very similar"
                       : similarity > 50

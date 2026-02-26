@@ -35,7 +35,7 @@ export function MetricsCard({
   const offset = circumference - (score / 100) * circumference;
 
   return (
-    <Card className="p-6 flex flex-col items-center justify-center border-indigo-500/20">
+    <Card className="p-6 flex flex-col items-center justify-center border-indigo-500/20 bg-slate-900/60">
       <div className="relative w-32 h-32 mb-4">
         <svg
           className="w-full h-full transform -rotate-90"
@@ -66,13 +66,13 @@ export function MetricsCard({
           <span className={`text-3xl font-bold ${getTextColor()}`}>
             {score}
           </span>
-          <span className="text-xs text-gray-400">/100</span>
+          <span className="text-xs text-slate-300">/100</span>
         </div>
       </div>
 
       <h3 className="font-semibold text-white text-center">{title}</h3>
       {description && (
-        <p className="text-xs text-gray-400 text-center mt-2">{description}</p>
+        <p className="text-xs text-slate-200 text-center mt-2">{description}</p>
       )}
     </Card>
   );

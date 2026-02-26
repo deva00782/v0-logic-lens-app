@@ -54,7 +54,7 @@ export function AdvancedMetricsSection({ metrics }: AdvancedMetricsProps) {
       {isExpanded && (
         <div className="space-y-4 animate-in fade-in duration-300">
           {/* Maintainability Index */}
-          <Card className="p-4 border-indigo-500/20">
+          <Card className="p-4 border-indigo-500/20 bg-slate-900/60">
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <h4 className="font-medium text-white">Maintainability Index</h4>
@@ -73,7 +73,7 @@ export function AdvancedMetricsSection({ metrics }: AdvancedMetricsProps) {
                   <span className="text-xs text-gray-300">/100</span>
                 </div>
               </div>
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-slate-200">
                 {metrics.maintainabilityDescription}
               </p>
               <div className="w-full h-2 bg-slate-700 rounded-full overflow-hidden">
@@ -88,7 +88,7 @@ export function AdvancedMetricsSection({ metrics }: AdvancedMetricsProps) {
           </Card>
 
           {/* Coupling Score */}
-          <Card className="p-4 border-indigo-500/20">
+          <Card className="p-4 border-indigo-500/20 bg-slate-900/60">
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <h4 className="font-medium text-white">Coupling Score</h4>
@@ -104,10 +104,10 @@ export function AdvancedMetricsSection({ metrics }: AdvancedMetricsProps) {
                   >
                     {metrics.couplingScore}
                   </span>
-                  <span className="text-xs text-gray-300">/100</span>
+                  <span className="text-xs text-slate-300">/100</span>
                 </div>
               </div>
-              <p className="text-sm text-gray-400">{metrics.couplingDescription}</p>
+              <p className="text-sm text-slate-200">{metrics.couplingDescription}</p>
               <div className="w-full h-2 bg-slate-700 rounded-full overflow-hidden">
                 <div
                   className="h-full bg-gradient-to-r from-cyan-400 to-indigo-500"
@@ -120,7 +120,7 @@ export function AdvancedMetricsSection({ metrics }: AdvancedMetricsProps) {
           </Card>
 
           {/* Cohesion Score */}
-          <Card className="p-4 border-indigo-500/20">
+          <Card className="p-4 border-indigo-500/20 bg-slate-900/60">
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <h4 className="font-medium text-white">Cohesion Score</h4>
@@ -136,10 +136,10 @@ export function AdvancedMetricsSection({ metrics }: AdvancedMetricsProps) {
                   >
                     {metrics.cohesionScore}
                   </span>
-                  <span className="text-xs text-gray-300">/100</span>
+                  <span className="text-xs text-slate-300">/100</span>
                 </div>
               </div>
-              <p className="text-sm text-gray-400">{metrics.cohesionDescription}</p>
+              <p className="text-sm text-slate-200">{metrics.cohesionDescription}</p>
               <div className="w-full h-2 bg-slate-700 rounded-full overflow-hidden">
                 <div
                   className="h-full bg-gradient-to-r from-indigo-500 to-cyan-400"
@@ -152,32 +152,32 @@ export function AdvancedMetricsSection({ metrics }: AdvancedMetricsProps) {
           </Card>
 
           {/* Function Length Analysis */}
-          <Card className="p-4 border-indigo-500/20">
+          <Card className="p-4 border-indigo-500/20 bg-slate-900/60">
             <div className="space-y-3">
               <h4 className="font-medium text-white">Function Length Analysis</h4>
               <div className="grid grid-cols-2 gap-3">
-                <div className="bg-slate-800/50 rounded-lg p-3">
-                  <p className="text-xs text-gray-400">Average Length</p>
+                <div className="bg-slate-800 rounded-lg p-3">
+                  <p className="text-xs text-slate-300">Average Length</p>
                   <p className="text-2xl font-bold text-cyan-400">
                     {metrics.functionLengthAnalysis.averageLength}
                   </p>
-                  <p className="text-xs text-gray-500">lines</p>
+                  <p className="text-xs text-slate-400">lines</p>
                 </div>
-                <div className="bg-slate-800/50 rounded-lg p-3">
-                  <p className="text-xs text-gray-400">Max Length</p>
+                <div className="bg-slate-800 rounded-lg p-3">
+                  <p className="text-xs text-slate-300">Max Length</p>
                   <p className="text-2xl font-bold text-indigo-400">
                     {metrics.functionLengthAnalysis.maxLength}
                   </p>
-                  <p className="text-xs text-gray-500">lines</p>
+                  <p className="text-xs text-slate-400">lines</p>
                 </div>
-                <div className="bg-slate-800/50 rounded-lg p-3">
-                  <p className="text-xs text-gray-400">Total Functions</p>
+                <div className="bg-slate-800 rounded-lg p-3">
+                  <p className="text-xs text-slate-300">Total Functions</p>
                   <p className="text-2xl font-bold text-cyan-400">
                     {metrics.functionLengthAnalysis.totalFunctions}
                   </p>
                 </div>
-                <div className="bg-slate-800/50 rounded-lg p-3">
-                  <p className="text-xs text-gray-400">Exceeding Threshold</p>
+                <div className="bg-slate-800 rounded-lg p-3">
+                  <p className="text-xs text-slate-300">Exceeding Threshold</p>
                   <p
                     className={`text-2xl font-bold ${
                       metrics.functionLengthAnalysis.functionsExceedingThreshold > 0
@@ -189,14 +189,14 @@ export function AdvancedMetricsSection({ metrics }: AdvancedMetricsProps) {
                   </p>
                 </div>
               </div>
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-slate-400">
                 Recommended threshold: {metrics.functionLengthAnalysis.recommendedThreshold} lines
               </p>
             </div>
           </Card>
 
           {/* Dead Code Detection */}
-          <Card className="p-4 border-indigo-500/20">
+          <Card className="p-4 border-indigo-500/20 bg-slate-900/60">
             <div className="space-y-3">
               <div className="flex items-center gap-2">
                 <AlertCircle className="h-4 w-4 text-orange-400" />
@@ -204,14 +204,14 @@ export function AdvancedMetricsSection({ metrics }: AdvancedMetricsProps) {
               </div>
 
               <div className="grid grid-cols-2 gap-3">
-                <div className="bg-slate-800/50 rounded-lg p-3">
-                  <p className="text-xs text-gray-400">Potential Dead Lines</p>
+                <div className="bg-slate-800 rounded-lg p-3">
+                  <p className="text-xs text-slate-300">Potential Dead Lines</p>
                   <p className="text-2xl font-bold text-orange-400">
                     {metrics.deadCodeDetection.potentialDeadCodeLines}
                   </p>
                 </div>
-                <div className="bg-slate-800/50 rounded-lg p-3">
-                  <p className="text-xs text-gray-400">Dead Code %</p>
+                <div className="bg-slate-800 rounded-lg p-3">
+                  <p className="text-xs text-slate-300">Dead Code %</p>
                   <p className="text-2xl font-bold text-orange-400">
                     {metrics.deadCodeDetection.deadCodePercentage}%
                   </p>
@@ -221,7 +221,7 @@ export function AdvancedMetricsSection({ metrics }: AdvancedMetricsProps) {
               {/* Unused Variables */}
               {metrics.deadCodeDetection.unusedVariables.length > 0 && (
                 <div>
-                  <p className="text-xs font-medium text-gray-300 mb-2">
+                  <p className="text-xs font-medium text-slate-200 mb-2">
                     Unused Variables:
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -237,7 +237,7 @@ export function AdvancedMetricsSection({ metrics }: AdvancedMetricsProps) {
               {/* Unused Functions */}
               {metrics.deadCodeDetection.unusedFunctions.length > 0 && (
                 <div>
-                  <p className="text-xs font-medium text-gray-300 mb-2">
+                  <p className="text-xs font-medium text-slate-200 mb-2">
                     Unused Functions:
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -253,7 +253,7 @@ export function AdvancedMetricsSection({ metrics }: AdvancedMetricsProps) {
               {/* Unreachable Code */}
               {metrics.deadCodeDetection.unreachableCode.length > 0 && (
                 <div>
-                  <p className="text-xs font-medium text-gray-300 mb-2">
+                  <p className="text-xs font-medium text-slate-200 mb-2">
                     Unreachable Code:
                   </p>
                   <div className="flex flex-wrap gap-2">
