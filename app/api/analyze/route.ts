@@ -1,9 +1,19 @@
 import { analyzeCode } from "@/lib/metrics";
-import type { AnalysisResult } from "@/types/metrics";
+import { analyzeLogic } from "@/lib/logic-analyzer";
+import { detectErrors } from "@/lib/error-analyzer";
+import { generateImprovements } from "@/lib/code-improver";
+import type { AnalysisResult, LogicExplanation, CodeError, CodeImprovement } from "@/types/metrics";
+
+export interface ExtendedAnalysisResult {
+  metrics: AnalysisResult;
+  logic: LogicExplanation;
+  errors: CodeError[];
+  improvements: CodeImprovement[];
+}
 
 export async function POST(request: Request) {
   try {
-    const { code } = await request.json();
+    const { code, analysisType = "full" } = await request.json();
 
     if (!code || typeof code !== "string") {
       return Response.json(
@@ -19,7 +29,12 @@ export async function POST(request: Request) {
       );
     }
 
-    const result: AnalysisResult = analyzeCode(code);
+    const result: ExtendedAnalysisResult = {
+      metrics: analyzeCode(code),
+      logic: analyzeLogic(code),
+      errors: detectErrors(code),
+      improvements: generateImprovements(code),
+    };
 
     return Response.json(result);
   } catch (error) {

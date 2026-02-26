@@ -8,9 +8,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CodeEditor } from "@/components/code-editor";
 import { MetricsCard } from "@/components/metrics-card";
 import { AdvancedMetricsSection } from "@/components/advanced-metrics";
+import { LogicExplanationSection } from "@/components/logic-explanation";
+import { ErrorAnalysisSection } from "@/components/error-analysis";
+import { CodeImprovementsSection } from "@/components/code-improvements";
 import { Spinner } from "@/components/ui/spinner";
 import { ArrowLeft, Play, Copy } from "lucide-react";
-import type { AnalysisResult } from "@/types/metrics";
+import type { AnalysisResult, LogicExplanation, CodeError, CodeImprovement } from "@/types/metrics";
 
 const sampleCode = `def calculate_fibonacci(n):
     """Calculate the nth Fibonacci number."""
@@ -55,14 +58,22 @@ def validate_email(email):
                         return True
     return False`;
 
+interface ExtendedAnalysisResult {
+  metrics: AnalysisResult;
+  logic: LogicExplanation;
+  errors: CodeError[];
+  improvements: CodeImprovement[];
+}
+
 export default function AnalyzePage() {
   const router = useRouter();
   const [code, setCode] = useState("");
   const [comparisonCode, setComparisonCode] = useState("");
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<AnalysisResult | null>(null);
+  const [result, setResult] = useState<ExtendedAnalysisResult | null>(null);
   const [similarity, setSimilarity] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState("single");
+  const [resultsTab, setResultsTab] = useState("metrics");
 
   const handleAnalyze = async () => {
     if (!code.trim()) {
@@ -79,8 +90,9 @@ export default function AnalyzePage() {
       });
 
       if (!response.ok) throw new Error("Analysis failed");
-      const data = await response.json();
+      const data: ExtendedAnalysisResult = await response.json();
       setResult(data);
+      setResultsTab("metrics");
     } catch (error) {
       console.error("Error:", error);
       alert("Failed to analyze code");
@@ -190,89 +202,117 @@ export default function AnalyzePage() {
             {/* Results */}
             {result && (
               <div className="space-y-6 animate-in fade-in duration-500">
-                <div>
-                  <h2 className="text-2xl font-bold text-white mb-6">
-                    Analysis Results
-                  </h2>
+                {/* Results Tabs */}
+                <Tabs value={resultsTab} onValueChange={setResultsTab} className="w-full">
+                  <TabsList className="grid w-full grid-cols-4 bg-slate-800/50 border border-indigo-500/20">
+                    <TabsTrigger value="metrics">Metrics</TabsTrigger>
+                    <TabsTrigger value="logic">Code Logic</TabsTrigger>
+                    <TabsTrigger value="errors">Errors</TabsTrigger>
+                    <TabsTrigger value="improvements">Improvements</TabsTrigger>
+                  </TabsList>
 
-                  {/* Overall Score */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                    <MetricsCard
-                      title="Overall Quality"
-                      score={result.overallScore}
-                      color={
-                        result.overallScore >= 70
-                          ? "green"
-                          : result.overallScore >= 50
-                            ? "yellow"
-                            : "orange"
-                      }
-                    />
-                    <MetricsCard
-                      title="Complexity"
-                      score={result.complexity}
-                      color={
-                        result.complexity <= 50 ? "green" : "orange"
-                      }
-                      description="Lower is better"
-                    />
-                    <MetricsCard
-                      title="Modularity"
-                      score={result.modularity}
-                      color={
-                        result.modularity >= 60 ? "cyan" : "orange"
-                      }
-                    />
-                    <MetricsCard
-                      title="Naming Conventions"
-                      score={result.naming}
-                      color={result.naming >= 60 ? "green" : "yellow"}
-                    />
-                    <MetricsCard
-                      title="Duplication"
-                      score={result.duplication}
-                      color={
-                        result.duplication >= 60
-                          ? "green"
-                          : result.duplication >= 40
-                            ? "yellow"
-                            : "orange"
-                      }
-                      description="Higher is better"
-                    />
-                    <MetricsCard
-                      title="Logical Depth"
-                      score={result.logicalDepth}
-                      color={
-                        result.logicalDepth <= 50 ? "green" : "orange"
-                      }
-                      description="Lower is better"
-                    />
-                  </div>
+                  {/* Metrics Tab */}
+                  <TabsContent value="metrics" className="space-y-6">
+                    <div>
+                      <h2 className="text-2xl font-bold text-white mb-6">
+                        Analysis Results
+                      </h2>
 
-                  {/* Suggestions */}
-                  <Card className="p-6 border-indigo-500/20 bg-slate-900/60">
-                    <h3 className="text-lg font-semibold text-white mb-4">
-                      Recommendations
-                    </h3>
-                    <ul className="space-y-3">
-                      {result.suggestions.map((suggestion, idx) => (
-                        <li
-                          key={idx}
-                          className="flex gap-3 text-slate-200"
-                        >
-                          <span className="text-cyan-400 font-bold">→</span>
-                          <span>{suggestion}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </Card>
+                      {/* Overall Score */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                        <MetricsCard
+                          title="Overall Quality"
+                          score={result.metrics.overallScore}
+                          color={
+                            result.metrics.overallScore >= 70
+                              ? "green"
+                              : result.metrics.overallScore >= 50
+                                ? "yellow"
+                                : "orange"
+                          }
+                        />
+                        <MetricsCard
+                          title="Complexity"
+                          score={result.metrics.complexity}
+                          color={
+                            result.metrics.complexity <= 50 ? "green" : "orange"
+                          }
+                          description="Lower is better"
+                        />
+                        <MetricsCard
+                          title="Modularity"
+                          score={result.metrics.modularity}
+                          color={
+                            result.metrics.modularity >= 60 ? "cyan" : "orange"
+                          }
+                        />
+                        <MetricsCard
+                          title="Naming Conventions"
+                          score={result.metrics.naming}
+                          color={result.metrics.naming >= 60 ? "green" : "yellow"}
+                        />
+                        <MetricsCard
+                          title="Duplication"
+                          score={result.metrics.duplication}
+                          color={
+                            result.metrics.duplication >= 60
+                              ? "green"
+                              : result.metrics.duplication >= 40
+                                ? "yellow"
+                                : "orange"
+                          }
+                          description="Higher is better"
+                        />
+                        <MetricsCard
+                          title="Logical Depth"
+                          score={result.metrics.logicalDepth}
+                          color={
+                            result.metrics.logicalDepth <= 50 ? "green" : "orange"
+                          }
+                          description="Lower is better"
+                        />
+                      </div>
 
-                  {/* Advanced Metrics */}
-                  {result.advancedMetrics && (
-                    <AdvancedMetricsSection metrics={result.advancedMetrics} />
-                  )}
-                </div>
+                      {/* Suggestions */}
+                      <Card className="p-6 border-indigo-500/20 bg-slate-900/60">
+                        <h3 className="text-lg font-semibold text-white mb-4">
+                          Recommendations
+                        </h3>
+                        <ul className="space-y-3">
+                          {result.metrics.suggestions.map((suggestion, idx) => (
+                            <li
+                              key={idx}
+                              className="flex gap-3 text-slate-200"
+                            >
+                              <span className="text-cyan-400 font-bold">→</span>
+                              <span>{suggestion}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </Card>
+
+                      {/* Advanced Metrics */}
+                      {result.metrics.advancedMetrics && (
+                        <AdvancedMetricsSection metrics={result.metrics.advancedMetrics} />
+                      )}
+                    </div>
+                  </TabsContent>
+
+                  {/* Logic Explanation Tab */}
+                  <TabsContent value="logic" className="space-y-6">
+                    <LogicExplanationSection logic={result.logic} />
+                  </TabsContent>
+
+                  {/* Error Analysis Tab */}
+                  <TabsContent value="errors" className="space-y-6">
+                    <ErrorAnalysisSection errors={result.errors} />
+                  </TabsContent>
+
+                  {/* Code Improvements Tab */}
+                  <TabsContent value="improvements" className="space-y-6">
+                    <CodeImprovementsSection improvements={result.improvements} />
+                  </TabsContent>
+                </Tabs>
               </div>
             )}
           </TabsContent>

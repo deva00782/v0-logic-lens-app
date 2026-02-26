@@ -42,3 +42,39 @@ export interface SimilarityResult {
   similarity: number;
   differences: string[];
 }
+
+export interface LogicExplanation {
+  summary: string;
+  purpose: string;
+  inputs: string[];
+  outputs: string[];
+  mainFlow: string[];
+  patterns: string[];
+  complexity: string;
+  timeComplexity: string;
+  spaceComplexity: string;
+}
+
+export interface CodeError {
+  id: string;
+  line: number;
+  type: 'syntax' | 'logic' | 'performance' | 'best-practice';
+  severity: 'critical' | 'warning' | 'info';
+  message: string;
+  explanation: string;
+  whyItOccurs: string;
+  impact: string;
+  suggestion: string;
+  example?: string;
+}
+
+export interface CodeImprovement {
+  title: string;
+  category: 'performance' | 'readability' | 'best-practice' | 'maintainability';
+  severity: 'critical' | 'major' | 'minor';
+  currentCode: string;
+  improvedCode: string;
+  explanation: string;
+  benefits: string[];
+  considerations: string;
+}
