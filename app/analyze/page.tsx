@@ -11,9 +11,14 @@ import { AdvancedMetricsSection } from "@/components/advanced-metrics";
 import { LogicExplanationSection } from "@/components/logic-explanation";
 import { ErrorAnalysisSection } from "@/components/error-analysis";
 import { CodeImprovementsSection } from "@/components/code-improvements";
+import { InsightSummary } from "@/components/insight-summary";
+import { LineByLineInsights } from "@/components/line-by-line-insights";
+import { SimplifiedCode } from "@/components/simplified-code";
+import { AlternativeImplementation } from "@/components/alternative-implementation";
+import { InsightSuggestions } from "@/components/insight-suggestions";
 import { Spinner } from "@/components/ui/spinner";
 import { ArrowLeft, Play, Copy } from "lucide-react";
-import type { AnalysisResult, LogicExplanation, CodeError, CodeImprovement } from "@/types/metrics";
+import type { AnalysisResult, LogicExplanation, CodeError, CodeImprovement, CodeInsightData } from "@/types/metrics";
 
 const sampleCode = `def calculate_fibonacci(n):
     """Calculate the nth Fibonacci number."""
@@ -74,6 +79,8 @@ export default function AnalyzePage() {
   const [similarity, setSimilarity] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState("single");
   const [resultsTab, setResultsTab] = useState("metrics");
+  const [analysisMode, setAnalysisMode] = useState<"full" | "insight">("full");
+  const [insightResult, setInsightResult] = useState<CodeInsightData | null>(null);
 
   const handleAnalyze = async () => {
     if (!code.trim()) {
@@ -83,16 +90,28 @@ export default function AnalyzePage() {
 
     setLoading(true);
     try {
-      const response = await fetch("/api/analyze", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code }),
-      });
+      if (analysisMode === "full") {
+        const response = await fetch("/api/analyze", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ code }),
+        });
 
-      if (!response.ok) throw new Error("Analysis failed");
-      const data: ExtendedAnalysisResult = await response.json();
-      setResult(data);
-      setResultsTab("metrics");
+        if (!response.ok) throw new Error("Analysis failed");
+        const data: ExtendedAnalysisResult = await response.json();
+        setResult(data);
+        setResultsTab("metrics");
+      } else {
+        const response = await fetch("/api/insight", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ code }),
+        });
+
+        if (!response.ok) throw new Error("Insight analysis failed");
+        const data: CodeInsightData = await response.json();
+        setInsightResult(data);
+      }
     } catch (error) {
       console.error("Error:", error);
       alert("Failed to analyze code");
@@ -165,9 +184,37 @@ export default function AnalyzePage() {
           <TabsContent value="single" className="space-y-6">
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <h2 className="text-xl font-semibold text-white">
-                  Enter Your Python Code
-                </h2>
+                <div>
+                  <h2 className="text-xl font-semibold text-white mb-3">
+                    Enter Your Python Code
+                  </h2>
+                  <div className="flex gap-2">
+                    <Button
+                      variant={analysisMode === "full" ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => {
+                        setAnalysisMode("full");
+                        setInsightResult(null);
+                        setResult(null);
+                      }}
+                      className="text-xs"
+                    >
+                      Full Analysis
+                    </Button>
+                    <Button
+                      variant={analysisMode === "insight" ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => {
+                        setAnalysisMode("insight");
+                        setResult(null);
+                        setInsightResult(null);
+                      }}
+                      className="text-xs"
+                    >
+                      Code Insight Mode
+                    </Button>
+                  </div>
+                </div>
                 <Button
                   variant="outline"
                   size="sm"
@@ -200,7 +247,7 @@ export default function AnalyzePage() {
             </div>
 
             {/* Results */}
-            {result && (
+            {result && analysisMode === "full" && (
               <div className="space-y-6 animate-in fade-in duration-500">
                 {/* Results Tabs */}
                 <Tabs value={resultsTab} onValueChange={setResultsTab} className="w-full">
@@ -313,6 +360,36 @@ export default function AnalyzePage() {
                     <CodeImprovementsSection improvements={result.improvements} />
                   </TabsContent>
                 </Tabs>
+              </div>
+            )}
+
+            {/* Code Insight Results */}
+            {insightResult && analysisMode === "insight" && (
+              <div className="space-y-6 animate-in fade-in duration-500">
+                <h2 className="text-2xl font-bold text-white">Code Insight Analysis</h2>
+                
+                {/* Summary Cards */}
+                <InsightSummary summary={insightResult.summary} />
+
+                {/* Line-by-Line Insights */}
+                <LineByLineInsights insights={insightResult.lineByLineInsights} />
+
+                {/* Simplified Code */}
+                <SimplifiedCode
+                  simplifiedCode={insightResult.simplifiedCode}
+                  explanation={insightResult.simplifiedExplanation}
+                />
+
+                {/* Alternative Implementation */}
+                <AlternativeImplementation
+                  title={insightResult.alternativeImplementation.title}
+                  description={insightResult.alternativeImplementation.description}
+                  code={insightResult.alternativeImplementation.code}
+                  tradeoffs={insightResult.alternativeImplementation.tradeoffs}
+                />
+
+                {/* Suggestions */}
+                <InsightSuggestions suggestions={insightResult.suggestions} />
               </div>
             )}
           </TabsContent>

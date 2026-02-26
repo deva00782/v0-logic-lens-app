@@ -78,3 +78,33 @@ export interface CodeImprovement {
   benefits: string[];
   considerations: string;
 }
+
+export interface LineInsight {
+  lineNumber: number;
+  code: string;
+  insight: string;
+  type: 'good' | 'warning' | 'info' | 'improvement';
+}
+
+export interface CodeInsightData {
+  summary: {
+    totalLines: number;
+    totalFunctions: number;
+    complexity: string;
+    mainPurpose: string;
+  };
+  lineByLineInsights: LineInsight[];
+  simplifiedCode: string;
+  simplifiedExplanation: string;
+  alternativeImplementation: {
+    title: string;
+    description: string;
+    code: string;
+    tradeoffs: string;
+  };
+  suggestions: {
+    category: string;
+    suggestion: string;
+    example: string;
+  }[];
+}
