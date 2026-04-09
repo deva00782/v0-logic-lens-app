@@ -70,14 +70,13 @@ export default function Home() {
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
         <div className="text-center space-y-6 mb-16">
           <h1 className="text-4xl md:text-6xl font-bold text-white text-balance">
-            Clarity to Program{" "}
+            Code Analysis{" "}
             <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
-              Structure
+              Built by Developers
             </span>
           </h1>
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto text-balance">
-            Elevate your Python code quality with comprehensive static analysis.
-            Get actionable insights to build cleaner, more maintainable software.
+            Professional Python code quality analysis designed by developers, for developers. Get the insights you need to write cleaner, more maintainable code.
           </p>
 
           <div className="flex gap-4 justify-center pt-4">
@@ -141,9 +140,12 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="border-t border-indigo-500/20 mt-16 py-8">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-sm">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-sm space-y-3">
           <p>
             Logic Lens — Professional Code Quality Analysis for Python Developers
+          </p>
+          <p className="text-gray-600">
+            Crafted by humans, engineered for excellence.
           </p>
         </div>
       </footer>

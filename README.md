@@ -1,8 +1,8 @@
 # Logic Lens
 
-**Professional Python Code Quality Analysis Tool**
+**Professional Python Code Quality Analysis — Built by Developers**
 
-A modern, production-ready web application for analyzing Python code structure, quality metrics, and maintainability. Built with Next.js, React, TypeScript, and TailwindCSS.
+A modern, production-ready web application for analyzing Python code structure, quality metrics, and maintainability. Engineered by developers who understand what clean code really means. Built with Next.js, React, TypeScript, and TailwindCSS.
 
 ![Status](https://img.shields.io/badge/status-complete-brightgreen)
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
@@ -23,32 +23,32 @@ pnpm dev
 ## ✨ Features
 
 ### 📊 Comprehensive Code Analysis
-- **Cyclomatic Complexity**: Measure code complexity
-- **Modularity Score**: Assess code reusability
-- **Naming Conventions**: Evaluate code clarity
-- **Code Duplication**: Find repeated patterns
-- **Logical Depth**: Identify deep nesting issues
+- **Cyclomatic Complexity**: Understand the real complexity hiding in your functions
+- **Modularity Score**: See how reusable and maintainable your code truly is
+- **Naming Conventions**: Catch clarity issues that hurt code readability
+- **Code Duplication**: Find the patterns you're repeating without realizing it
+- **Logical Depth**: Spot deeply nested code that needs refactoring
 
 ### 🔍 Advanced Metrics (Expandable Section)
-- **Maintainability Index**: Halstead metrics-based analysis
-- **Coupling Score**: Measure module independence
-- **Cohesion Score**: Analyze class method relationships
-- **Function Length Analysis**: Identify long functions
-- **Dead Code Detection**: Find unused code patterns
+- **Maintainability Index**: A holistic view of your code health
+- **Coupling Score**: Measure how tightly your modules are bound together
+- **Cohesion Score**: Analyze how well your class methods work together
+- **Function Length Analysis**: Identify functions that do too much
+- **Dead Code Detection**: Find the code you forgot about
 
-### 🎨 Modern Interface
-- Dark theme with indigo/cyan accents
-- Responsive design (mobile to desktop)
-- Smooth animations and transitions
-- Professional SaaS aesthetic
-- Loading states and error handling
+### 🎨 Thoughtfully Designed Interface
+- Dark theme with indigo/cyan accents for comfortable, focused coding
+- Responsive design that works beautifully on any device
+- Smooth animations that feel natural, not distracting
+- Professional, clean aesthetic built for real developers
+- Proper error handling and loading states
 
-### 🚀 Developer Experience
-- Single file or side-by-side comparison
-- File upload support (.py files)
-- Sample code for quick testing
-- Copy & clear buttons
-- Real-time character count
+### 🚀 Developer Experience First
+- Analyze single files or compare side-by-side
+- Drag-and-drop file upload for .py files
+- Pre-loaded sample code to test immediately
+- Quick copy and clear actions
+- Real-time feedback with character count
 
 ## 📁 Project Structure
 
@@ -348,10 +348,12 @@ The application is **production-ready** and includes:
 
 ---
 
-**Built with ❤️ using Next.js, React, and TypeScript**
+**Engineered by developers, for developers. Built with Next.js, React, and TypeScript.**
 
 **Status**: ✅ Complete and Production-Ready
 
 **Version**: 1.0.0
 
 **Last Updated**: 2026
+
+**Note**: This tool is built entirely by humans. No AI-generated analysis — just solid engineering and thoughtful design.
