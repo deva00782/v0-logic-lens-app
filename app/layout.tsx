@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
-import { ThemeProvider } from '@/components/theme-provider'
+import { RootLayoutClient } from '@/components/root-layout-client'
 import './globals.css'
 
 const _geist = Geist({ subsets: ["latin"] });
@@ -47,9 +47,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="font-sans antialiased">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+        <RootLayoutClient>
           {children}
-        </ThemeProvider>
+        </RootLayoutClient>
         <Analytics />
       </body>
     </html>
