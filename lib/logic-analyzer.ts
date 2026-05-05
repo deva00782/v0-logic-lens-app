@@ -1,5 +1,3 @@
-import { CodeAnalysis } from '@/types/metrics';
-
 export interface LogicExplanation {
   summary: string;
   purpose: string;
