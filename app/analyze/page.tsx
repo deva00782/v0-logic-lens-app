@@ -182,65 +182,87 @@ export default function AnalyzePage() {
 
           {/* Single File Analysis */}
           <TabsContent value="single" className="space-y-6">
+            {/* Header Section */}
             <div className="space-y-4">
+              <div>
+                <h2 className="text-2xl font-bold text-white mb-2">
+                  Analyze Python Code
+                </h2>
+                <p className="text-slate-300 text-sm">
+                  Choose an analysis mode and paste your code to get started
+                </p>
+              </div>
+
+              {/* Mode Selection Tabs */}
+              <div className="flex gap-2 p-2 bg-slate-800/30 rounded-lg border border-indigo-500/20">
+                <Button
+                  variant={analysisMode === "full" ? "default" : "ghost"}
+                  size="sm"
+                  onClick={() => {
+                    setAnalysisMode("full");
+                    setInsightResult(null);
+                    setResult(null);
+                  }}
+                  className={`flex-1 ${
+                    analysisMode === "full"
+                      ? "bg-indigo-600 hover:bg-indigo-700 text-white"
+                      : "text-slate-300 hover:text-white hover:bg-slate-700/50"
+                  }`}
+                >
+                  Full Analysis
+                </Button>
+                <Button
+                  variant={analysisMode === "insight" ? "default" : "ghost"}
+                  size="sm"
+                  onClick={() => {
+                    setAnalysisMode("insight");
+                    setResult(null);
+                    setInsightResult(null);
+                  }}
+                  className={`flex-1 ${
+                    analysisMode === "insight"
+                      ? "bg-indigo-600 hover:bg-indigo-700 text-white"
+                      : "text-slate-300 hover:text-white hover:bg-slate-700/50"
+                  }`}
+                >
+                  Code Insight Mode
+                </Button>
+              </div>
+            </div>
+
+            {/* Code Editor */}
+            <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="text-xl font-semibold text-white mb-3">
-                    Enter Your Python Code
-                  </h2>
-                  <div className="flex gap-2">
-                    <Button
-                      variant={analysisMode === "full" ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => {
-                        setAnalysisMode("full");
-                        setInsightResult(null);
-                        setResult(null);
-                      }}
-                      className="text-xs"
-                    >
-                      Full Analysis
-                    </Button>
-                    <Button
-                      variant={analysisMode === "insight" ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => {
-                        setAnalysisMode("insight");
-                        setResult(null);
-                        setInsightResult(null);
-                      }}
-                      className="text-xs"
-                    >
-                      Code Insight Mode
-                    </Button>
-                  </div>
-                </div>
+                <label className="text-sm font-semibold text-slate-200">
+                  Python Code
+                </label>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={loadSample}
-                  className="text-xs"
+                  className="text-xs text-slate-300 hover:text-white"
                 >
-                  Load Sample
+                  Load Sample Code
                 </Button>
               </div>
               <CodeEditor value={code} onChange={setCode} />
+            </div>
 
               <Button
                 onClick={handleAnalyze}
                 disabled={loading || !code.trim()}
                 size="lg"
-                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white gap-2"
+                className="w-full bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-semibold gap-2 rounded-lg transition-all"
               >
                 {loading ? (
                   <>
-                    <Spinner className="h-4 w-4" />
-                    Analyzing...
+                    <Spinner className="h-5 w-5" />
+                    <span>Analyzing Your Code...</span>
                   </>
                 ) : (
                   <>
-                    <Play className="h-4 w-4" />
-                    Run Analysis
+                    <Play className="h-5 w-5" />
+                    <span>Run Analysis</span>
                   </>
                 )}
               </Button>
@@ -249,13 +271,23 @@ export default function AnalyzePage() {
             {/* Results */}
             {result && analysisMode === "full" && (
               <div className="space-y-6 animate-in fade-in duration-500">
+                {/* Results Header */}
+                <div>
+                  <h2 className="text-2xl font-bold text-white mb-4">
+                    Analysis Results
+                  </h2>
+                  <p className="text-slate-300 text-sm">
+                    Review detailed metrics, code logic, errors, and improvement suggestions
+                  </p>
+                </div>
+
                 {/* Results Tabs */}
                 <Tabs value={resultsTab} onValueChange={setResultsTab} className="w-full">
-                  <TabsList className="grid w-full grid-cols-4 bg-slate-800/50 border border-indigo-500/20">
-                    <TabsTrigger value="metrics">Metrics</TabsTrigger>
-                    <TabsTrigger value="logic">Code Logic</TabsTrigger>
-                    <TabsTrigger value="errors">Errors</TabsTrigger>
-                    <TabsTrigger value="improvements">Improvements</TabsTrigger>
+                  <TabsList className="grid w-full grid-cols-4 bg-slate-800/40 border border-slate-700/50 rounded-lg p-1">
+                    <TabsTrigger value="metrics" className="data-[state=active]:bg-indigo-600 data-[state=active]:text-white rounded">Metrics</TabsTrigger>
+                    <TabsTrigger value="logic" className="data-[state=active]:bg-indigo-600 data-[state=active]:text-white rounded">Code Logic</TabsTrigger>
+                    <TabsTrigger value="errors" className="data-[state=active]:bg-indigo-600 data-[state=active]:text-white rounded">Errors</TabsTrigger>
+                    <TabsTrigger value="improvements" className="data-[state=active]:bg-indigo-600 data-[state=active]:text-white rounded">Improvements</TabsTrigger>
                   </TabsList>
 
                   {/* Metrics Tab */}
@@ -321,7 +353,7 @@ export default function AnalyzePage() {
                       </div>
 
                       {/* Suggestions */}
-                      <Card className="p-6 border-indigo-500/20 bg-slate-900/60">
+                      <Card className="p-6 border-indigo-500/30 bg-indigo-950/20">
                         <h3 className="text-lg font-semibold text-white mb-4">
                           Recommendations
                         </h3>
@@ -329,9 +361,9 @@ export default function AnalyzePage() {
                           {result.metrics.suggestions.map((suggestion, idx) => (
                             <li
                               key={idx}
-                              className="flex gap-3 text-slate-200"
+                              className="flex gap-3 text-slate-100"
                             >
-                              <span className="text-cyan-400 font-bold">→</span>
+                              <span className="text-indigo-400 font-bold min-w-fit">→</span>
                               <span>{suggestion}</span>
                             </li>
                           ))}
@@ -366,7 +398,12 @@ export default function AnalyzePage() {
             {/* Code Insight Results */}
             {insightResult && analysisMode === "insight" && (
               <div className="space-y-6 animate-in fade-in duration-500">
-                <h2 className="text-2xl font-bold text-white">Code Insight Analysis</h2>
+                <div>
+                  <h2 className="text-2xl font-bold text-white mb-2">Code Insight Analysis</h2>
+                  <p className="text-slate-300 text-sm">
+                    Deep analysis of your code with practical insights and actionable suggestions
+                  </p>
+                </div>
                 
                 {/* Summary Cards */}
                 <InsightSummary summary={insightResult.summary} />
@@ -396,13 +433,28 @@ export default function AnalyzePage() {
 
           {/* Compare Files */}
           <TabsContent value="compare" className="space-y-6">
+            {/* Header */}
+            <div>
+              <h2 className="text-2xl font-bold text-white mb-2">
+                Compare Files
+              </h2>
+              <p className="text-slate-300 text-sm">
+                Paste two Python files to compare their similarity and differences
+              </p>
+            </div>
+
+            {/* Editor Grid */}
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-3">
-                <h2 className="text-lg font-semibold text-white">File 1</h2>
+                <label className="text-sm font-semibold text-slate-200">
+                  Python Code - File 1
+                </label>
                 <CodeEditor value={code} onChange={setCode} />
               </div>
               <div className="space-y-3">
-                <h2 className="text-lg font-semibold text-white">File 2</h2>
+                <label className="text-sm font-semibold text-slate-200">
+                  Python Code - File 2
+                </label>
                 <CodeEditor
                   value={comparisonCode}
                   onChange={setComparisonCode}
@@ -410,31 +462,32 @@ export default function AnalyzePage() {
               </div>
             </div>
 
+            {/* Compare Button */}
             <Button
               onClick={handleCompareSimilarity}
               disabled={
                 loading || !code.trim() || !comparisonCode.trim()
               }
               size="lg"
-              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white gap-2"
+              className="w-full bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-semibold gap-2 rounded-lg transition-all"
             >
               {loading ? (
                 <>
-                  <Spinner className="h-4 w-4" />
-                  Comparing...
+                  <Spinner className="h-5 w-5" />
+                  <span>Comparing Files...</span>
                 </>
               ) : (
                 <>
-                  <Copy className="h-4 w-4" />
-                  Compare Similarity
+                  <Copy className="h-5 w-5" />
+                  <span>Compare Similarity</span>
                 </>
               )}
             </Button>
 
             {similarity !== null && (
-              <Card className="p-6 border-indigo-500/20 bg-slate-900/60 animate-in fade-in">
+              <Card className="p-8 border-indigo-500/30 bg-indigo-950/20 animate-in fade-in rounded-lg">
                 <div className="text-center space-y-4">
-                  <h3 className="text-lg font-semibold text-white">
+                  <h3 className="text-xl font-bold text-white">
                     Similarity Score
                   </h3>
                   <div className="flex justify-center mb-6">
@@ -462,13 +515,13 @@ export default function AnalyzePage() {
                       />
                     </svg>
                     <div className="absolute flex flex-col items-center justify-center">
-                      <span className="text-4xl font-bold text-cyan-400">
+                      <span className="text-5xl font-bold text-indigo-400">
                         {similarity}
                       </span>
-                      <span className="text-slate-300">%</span>
+                      <span className="text-slate-200">%</span>
                     </div>
                   </div>
-                  <p className="text-slate-200">
+                  <p className="text-slate-100 font-medium">
                     {similarity > 80
                       ? "Files are very similar"
                       : similarity > 50

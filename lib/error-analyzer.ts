@@ -81,24 +81,24 @@ function detectSyntaxErrors(code: string, lines: string[]): CodeError[] {
     });
   }
 
-  // Indentation issues
-  lines.forEach((line, idx) => {
-    if (line.length > 0 && !/^[ \t]*\S/.test(line)) {
-      errors.push({
-        id: `indentation-${idx}`,
-        line: idx + 1,
-        type: 'syntax',
-        severity: 'critical',
-        message: 'Inconsistent or invalid indentation',
-        explanation:
-          'Python uses indentation to define code blocks. Indentation must be consistent throughout.',
-        whyItOccurs: 'Line has unexpected indentation that does not align with block structure.',
-        impact: 'Python will raise IndentationError preventing code execution.',
-        suggestion: 'Ensure indentation uses consistent spacing (usually 4 spaces).',
-        example: `# Wrong\nif x:\nprint("x is true")  # Not indented\n\n# Correct\nif x:\n    print("x is true")`,
-      });
-    }
-  });
+  // Mixed tabs and spaces
+  const hasTabs = /\t/.test(code);
+  const hasSpaces = / {2,}/.test(code);
+  if (hasTabs && hasSpaces) {
+    errors.push({
+      id: 'mixed-indentation',
+      line: 1,
+      type: 'syntax',
+      severity: 'critical',
+      message: 'Mixed tabs and spaces in indentation',
+      explanation:
+        'Python does not allow mixing tabs and spaces for indentation. Choose one consistently.',
+      whyItOccurs: 'Code uses both tab characters and space characters for indentation.',
+      impact: 'Python will raise TabError preventing code execution.',
+      suggestion: 'Use either tabs or spaces throughout (typically 4 spaces per indent level).',
+      example: `# Wrong\ndef func():\n\tprint("indented with tab")\n    print("indented with spaces")\n\n# Correct\ndef func():\n    print("indented with spaces")\n    print("also spaces")`,
+    });
+  }
 
   // Undefined variables - basic detection
   const assignments = new Set<string>();

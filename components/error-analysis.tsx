@@ -12,13 +12,13 @@ interface ErrorAnalysisProps {
 function getSeverityColor(severity: string) {
   switch (severity) {
     case 'critical':
-      return 'text-red-400 bg-red-500/10 border-red-500/30';
+      return 'bg-red-950/40 border-red-500/50';
     case 'warning':
-      return 'text-yellow-400 bg-yellow-500/10 border-yellow-500/30';
+      return 'bg-yellow-950/40 border-yellow-500/50';
     case 'info':
-      return 'text-blue-400 bg-blue-500/10 border-blue-500/30';
+      return 'bg-blue-950/40 border-blue-500/50';
     default:
-      return 'text-gray-400 bg-gray-500/10 border-gray-500/30';
+      return 'bg-slate-800/40 border-slate-500/50';
   }
 }
 
@@ -111,18 +111,20 @@ export function ErrorAnalysisSection({ errors }: ErrorAnalysisProps) {
             {/* Error Header */}
             <div className="flex items-start justify-between gap-4">
               <div className="flex items-start gap-3 flex-1">
-                <div className="pt-1">{getSeverityIcon(error.severity)}</div>
+                <div className={`pt-1 ${error.severity === 'critical' ? 'text-red-400' : error.severity === 'warning' ? 'text-yellow-400' : 'text-blue-400'}`}>
+                  {getSeverityIcon(error.severity)}
+                </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
                     <h4 className="font-semibold text-white">{error.message}</h4>
-                    <span className={`text-xs px-2 py-1 rounded ${getTypeColor(error.type)}`}>
+                    <span className={`text-xs px-2 py-1 rounded font-medium ${getTypeColor(error.type)}`}>
                       {error.type}
                     </span>
                   </div>
-                  <p className="text-xs text-slate-400 mt-1">Line {error.line}</p>
+                  <p className="text-xs text-slate-300 mt-1">Line {error.line}</p>
                 </div>
               </div>
-              <div className="pt-1">
+              <div className={`pt-1 ${error.severity === 'critical' ? 'text-red-400' : error.severity === 'warning' ? 'text-yellow-400' : 'text-blue-400'}`}>
                 {expandedError === error.id ? (
                   <ChevronUp className="h-5 w-5" />
                 ) : (
@@ -133,36 +135,36 @@ export function ErrorAnalysisSection({ errors }: ErrorAnalysisProps) {
 
             {/* Expanded Details */}
             {expandedError === error.id && (
-              <div className="mt-4 pt-4 border-t border-current border-opacity-30 space-y-3">
+              <div className="mt-4 pt-4 border-t border-slate-700 space-y-3">
                 {/* Explanation */}
                 <div>
-                  <p className="text-xs font-semibold text-slate-300 mb-1">What It Means</p>
-                  <p className="text-sm text-slate-200">{error.explanation}</p>
+                  <p className="text-xs font-semibold text-slate-200 mb-2">What It Means</p>
+                  <p className="text-sm text-slate-100">{error.explanation}</p>
                 </div>
 
                 {/* Why It Occurs */}
                 <div>
-                  <p className="text-xs font-semibold text-slate-300 mb-1">Why It Occurs</p>
-                  <p className="text-sm text-slate-200">{error.whyItOccurs}</p>
+                  <p className="text-xs font-semibold text-slate-200 mb-2">Why It Occurs</p>
+                  <p className="text-sm text-slate-100">{error.whyItOccurs}</p>
                 </div>
 
                 {/* Impact */}
                 <div>
-                  <p className="text-xs font-semibold text-slate-300 mb-1">Impact on Code</p>
-                  <p className="text-sm text-slate-200">{error.impact}</p>
+                  <p className="text-xs font-semibold text-slate-200 mb-2">Impact on Code</p>
+                  <p className="text-sm text-slate-100">{error.impact}</p>
                 </div>
 
                 {/* Suggestion */}
-                <div className="bg-slate-800/50 rounded p-3">
+                <div className="bg-emerald-950/30 rounded p-3 border border-emerald-500/30">
                   <p className="text-xs font-semibold text-emerald-300 mb-2">How to Fix</p>
-                  <p className="text-sm text-slate-200">{error.suggestion}</p>
+                  <p className="text-sm text-emerald-100">{error.suggestion}</p>
                 </div>
 
                 {/* Code Example */}
                 {error.example && (
-                  <div className="bg-slate-900/50 rounded p-3 border border-slate-700">
+                  <div className="bg-slate-900/60 rounded p-3 border border-slate-700">
                     <p className="text-xs font-semibold text-cyan-300 mb-2">Example</p>
-                    <pre className="text-xs text-slate-300 overflow-x-auto">
+                    <pre className="text-xs text-slate-200 overflow-x-auto font-mono">
                       <code>{error.example}</code>
                     </pre>
                   </div>
