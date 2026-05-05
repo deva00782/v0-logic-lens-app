@@ -17,7 +17,7 @@ import { SimplifiedCode } from "@/components/simplified-code";
 import { AlternativeImplementation } from "@/components/alternative-implementation";
 import { InsightSuggestions } from "@/components/insight-suggestions";
 import { Spinner } from "@/components/ui/spinner";
-import { ArrowLeft, Play, Copy } from "lucide-react";
+import { ArrowLeft, Play, Copy, Settings } from "lucide-react";
 import type { AnalysisResult, LogicExplanation, CodeError, CodeImprovement, CodeInsightData } from "@/types/metrics";
 
 const sampleCode = `def calculate_fibonacci(n):
@@ -165,6 +165,14 @@ export default function AnalyzePage() {
               </Button>
               <h1 className="text-2xl font-bold text-white">Code Analyzer</h1>
             </div>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => router.push("/settings/appearance")}
+              className="text-slate-400 hover:text-white"
+            >
+              <Settings className="h-5 w-5" />
+            </Button>
           </div>
         </div>
       </div>
