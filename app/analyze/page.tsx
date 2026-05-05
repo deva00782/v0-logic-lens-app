@@ -175,9 +175,9 @@ export default function AnalyzePage() {
           onValueChange={setActiveTab}
           className="w-full"
         >
-          <TabsList className="grid w-full max-w-md grid-cols-2 bg-slate-800/50 border border-indigo-500/20">
-            <TabsTrigger value="single">Single File</TabsTrigger>
-            <TabsTrigger value="compare">Compare Files</TabsTrigger>
+          <TabsList className="grid w-full max-w-md grid-cols-2 bg-slate-800/40 border border-slate-700/50 rounded-lg p-1">
+            <TabsTrigger value="single" className="rounded">Single File</TabsTrigger>
+            <TabsTrigger value="compare" className="rounded">Compare Files</TabsTrigger>
           </TabsList>
 
           {/* Single File Analysis */}
@@ -246,7 +246,6 @@ export default function AnalyzePage() {
                 </Button>
               </div>
               <CodeEditor value={code} onChange={setCode} />
-            </div>
 
               <Button
                 onClick={handleAnalyze}
@@ -284,10 +283,10 @@ export default function AnalyzePage() {
                 {/* Results Tabs */}
                 <Tabs value={resultsTab} onValueChange={setResultsTab} className="w-full">
                   <TabsList className="grid w-full grid-cols-4 bg-slate-800/40 border border-slate-700/50 rounded-lg p-1">
-                    <TabsTrigger value="metrics" className="data-[state=active]:bg-indigo-600 data-[state=active]:text-white rounded">Metrics</TabsTrigger>
-                    <TabsTrigger value="logic" className="data-[state=active]:bg-indigo-600 data-[state=active]:text-white rounded">Code Logic</TabsTrigger>
-                    <TabsTrigger value="errors" className="data-[state=active]:bg-indigo-600 data-[state=active]:text-white rounded">Errors</TabsTrigger>
-                    <TabsTrigger value="improvements" className="data-[state=active]:bg-indigo-600 data-[state=active]:text-white rounded">Improvements</TabsTrigger>
+                    <TabsTrigger value="metrics" className="rounded">Metrics</TabsTrigger>
+                    <TabsTrigger value="logic" className="rounded">Code Logic</TabsTrigger>
+                    <TabsTrigger value="errors" className="rounded">Errors</TabsTrigger>
+                    <TabsTrigger value="improvements" className="rounded">Improvements</TabsTrigger>
                   </TabsList>
 
                   {/* Metrics Tab */}
