@@ -80,11 +80,11 @@ export function LineByLineInsights({ insights }: LineByLineInsightsProps) {
               className="w-full p-3 flex items-start justify-between hover:bg-slate-800/50 transition-colors"
             >
               <div className="flex-1 text-left flex items-start gap-3">
-                <span className="text-xs text-slate-400 font-mono w-8">
+                <span className="text-xs text-slate-300 font-mono w-8">
                   {insight.lineNumber}
                 </span>
                 <div className="flex-1">
-                  <p className="text-xs text-slate-300 font-mono mb-2">
+                  <p className="text-xs text-slate-200 font-mono mb-2">
                     {insight.code.substring(0, 60)}
                     {insight.code.length > 60 ? "..." : ""}
                   </p>
@@ -102,7 +102,7 @@ export function LineByLineInsights({ insights }: LineByLineInsightsProps) {
 
             {expandedLines.has(insight.lineNumber) && (
               <div className="border-t border-inherit px-3 py-3 bg-slate-800/20">
-                <p className="text-sm text-slate-200">{insight.insight}</p>
+                <p className="text-sm text-slate-100">{insight.insight}</p>
               </div>
             )}
           </div>

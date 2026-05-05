@@ -82,7 +82,7 @@ export function CodeEditor({
             </Button>
           )}
         </div>
-        <span className="text-xs text-gray-400">
+        <span className="text-xs text-slate-300">
           {value.length} characters
         </span>
       </div>
@@ -92,7 +92,7 @@ export function CodeEditor({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         readOnly={readOnly}
-        className="w-full h-96 bg-slate-900 text-gray-100 p-4 font-mono text-sm focus:outline-none resize-none"
+        className="w-full h-96 bg-slate-900 text-slate-100 p-4 font-mono text-sm focus:outline-none resize-none placeholder:text-slate-500"
         spellCheck="false"
       />
     </Card>

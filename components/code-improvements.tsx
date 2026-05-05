@@ -136,8 +136,8 @@ export function CodeImprovementsSection({ improvements }: CodeImprovementsProps)
               <div className="border-t border-slate-700 p-4 space-y-4">
                 {/* Explanation */}
                 <div>
-                  <p className="text-xs font-semibold text-slate-300 mb-2">Explanation</p>
-                  <p className="text-sm text-slate-200">{improvement.explanation}</p>
+                  <p className="text-xs font-semibold text-slate-200 mb-2">Explanation</p>
+                  <p className="text-sm text-slate-100">{improvement.explanation}</p>
                 </div>
 
                 {/* Before and After Code */}
@@ -147,7 +147,7 @@ export function CodeImprovementsSection({ improvements }: CodeImprovementsProps)
                       <p className="text-xs font-semibold text-red-300">Before (Current)</p>
                       <CopyButton text={improvement.currentCode} />
                     </div>
-                    <pre className="bg-slate-800/50 rounded p-3 text-xs text-slate-300 overflow-x-auto border border-slate-700">
+                    <pre className="bg-slate-800/50 rounded p-3 text-xs text-slate-200 overflow-x-auto border border-slate-700 font-mono">
                       <code>{improvement.currentCode}</code>
                     </pre>
                   </div>
@@ -157,7 +157,7 @@ export function CodeImprovementsSection({ improvements }: CodeImprovementsProps)
                       <p className="text-xs font-semibold text-emerald-300">After (Improved)</p>
                       <CopyButton text={improvement.improvedCode} />
                     </div>
-                    <pre className="bg-slate-800/50 rounded p-3 text-xs text-slate-300 overflow-x-auto border border-emerald-500/30">
+                    <pre className="bg-slate-800/50 rounded p-3 text-xs text-slate-200 overflow-x-auto border border-emerald-500/30 font-mono">
                       <code>{improvement.improvedCode}</code>
                     </pre>
                   </div>
@@ -165,10 +165,10 @@ export function CodeImprovementsSection({ improvements }: CodeImprovementsProps)
 
                 {/* Benefits */}
                 <div>
-                  <p className="text-xs font-semibold text-slate-300 mb-2">Benefits</p>
+                  <p className="text-xs font-semibold text-slate-200 mb-2">Benefits</p>
                   <ul className="space-y-1">
                     {improvement.benefits.map((benefit, bIdx) => (
-                      <li key={bIdx} className="flex gap-2 text-sm text-slate-200">
+                      <li key={bIdx} className="flex gap-2 text-sm text-slate-100">
                         <span className="text-emerald-400 flex-shrink-0">✓</span>
                         <span>{benefit}</span>
                       </li>
@@ -178,8 +178,8 @@ export function CodeImprovementsSection({ improvements }: CodeImprovementsProps)
 
                 {/* Considerations */}
                 <div className="bg-slate-800/50 rounded p-3 border border-slate-700">
-                  <p className="text-xs font-semibold text-slate-300 mb-2">Important Considerations</p>
-                  <p className="text-sm text-slate-200">{improvement.considerations}</p>
+                  <p className="text-xs font-semibold text-slate-200 mb-2">Important Considerations</p>
+                  <p className="text-sm text-slate-100">{improvement.considerations}</p>
                 </div>
               </div>
             )}

@@ -51,9 +51,9 @@ export function InsightSuggestions({ suggestions }: InsightSuggestionsProps) {
             <div className="flex items-start gap-3">
               <div className="flex-1">
                 <p className="text-xs font-semibold mb-2">{item.category}</p>
-                <p className="text-sm text-slate-200 mb-3">{item.suggestion}</p>
+                <p className="text-sm text-slate-100 mb-3">{item.suggestion}</p>
                 <div className="bg-slate-950/50 rounded px-3 py-2 border border-slate-700/50">
-                  <p className="text-xs font-mono text-slate-300">
+                  <p className="text-xs font-mono text-slate-200">
                     {item.example}
                   </p>
                 </div>
@@ -65,7 +65,7 @@ export function InsightSuggestions({ suggestions }: InsightSuggestionsProps) {
 
       {suggestions.length === 0 && (
         <div className="text-center py-8">
-          <p className="text-slate-400">
+          <p className="text-slate-300">
             Great code! No major suggestions at this time.
           </p>
         </div>

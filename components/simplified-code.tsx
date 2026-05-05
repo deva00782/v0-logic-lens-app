@@ -46,14 +46,14 @@ export function SimplifiedCode({
 
       <div className="mb-4">
         <pre className="bg-slate-950 rounded-lg p-4 overflow-x-auto border border-slate-700">
-          <code className="text-sm text-slate-300 font-mono">
+          <code className="text-sm text-slate-200 font-mono">
             {simplifiedCode}
           </code>
         </pre>
       </div>
 
       <div className="bg-slate-800/50 rounded-lg p-4 border border-indigo-500/10">
-        <p className="text-sm text-slate-200 leading-relaxed">
+        <p className="text-sm text-slate-100 leading-relaxed">
           {explanation}
         </p>
       </div>

@@ -75,7 +75,7 @@ export default function Home() {
               Structure
             </span>
           </h1>
-          <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto text-balance">
+          <p className="text-lg md:text-xl text-slate-200 max-w-2xl mx-auto text-balance">
             Elevate your Python code quality with comprehensive static analysis.
             Get actionable insights to build cleaner, more maintainable software.
           </p>
@@ -112,7 +112,7 @@ export default function Home() {
                   <Icon className="h-8 w-8 text-cyan-400 group-hover:text-indigo-400 transition-colors" />
                 </div>
                 <h3 className="font-semibold text-white mb-2">{feature.title}</h3>
-                <p className="text-sm text-gray-400">{feature.description}</p>
+                <p className="text-sm text-slate-300">{feature.description}</p>
               </div>
             );
           })}
@@ -125,7 +125,7 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-white">
             Ready to Improve Your Code?
           </h2>
-          <p className="text-gray-400 max-w-xl mx-auto">
+          <p className="text-slate-200 max-w-xl mx-auto">
             Get instant metrics and actionable recommendations to write better Python
             code
           </p>
@@ -141,7 +141,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="border-t border-indigo-500/20 mt-16 py-8">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-sm">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-400 text-sm">
           <p>
             Logic Lens — Professional Code Quality Analysis for Python Developers
           </p>

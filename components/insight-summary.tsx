@@ -25,7 +25,7 @@ export function InsightSummary({ summary }: InsightSummaryProps) {
         <div className="flex items-start gap-3">
           <Code className="h-5 w-5 text-cyan-400 mt-1 flex-shrink-0" />
           <div>
-            <p className="text-xs text-slate-400">Total Lines</p>
+            <p className="text-xs text-slate-300">Total Lines</p>
             <p className="text-2xl font-bold text-white">
               {summary.totalLines}
             </p>
@@ -38,7 +38,7 @@ export function InsightSummary({ summary }: InsightSummaryProps) {
         <div className="flex items-start gap-3">
           <Layers className="h-5 w-5 text-purple-400 mt-1 flex-shrink-0" />
           <div>
-            <p className="text-xs text-slate-400">Functions/Methods</p>
+            <p className="text-xs text-slate-300">Functions/Methods</p>
             <p className="text-2xl font-bold text-white">
               {summary.totalFunctions}
             </p>
@@ -51,7 +51,7 @@ export function InsightSummary({ summary }: InsightSummaryProps) {
         <div className="flex items-start gap-3">
           <Zap className="h-5 w-5 text-yellow-400 mt-1 flex-shrink-0" />
           <div>
-            <p className="text-xs text-slate-400">Complexity</p>
+            <p className="text-xs text-slate-300">Complexity</p>
             <p className={`text-sm font-bold ${complexityColor}`}>
               {summary.complexity}
             </p>
@@ -64,8 +64,8 @@ export function InsightSummary({ summary }: InsightSummaryProps) {
         <div className="flex items-start gap-3">
           <BookOpen className="h-5 w-5 text-blue-400 mt-1 flex-shrink-0" />
           <div>
-            <p className="text-xs text-slate-400">Purpose</p>
-            <p className="text-xs text-slate-200 line-clamp-2">
+            <p className="text-xs text-slate-300">Purpose</p>
+            <p className="text-xs text-slate-100 line-clamp-2">
               {summary.mainPurpose}
             </p>
           </div>

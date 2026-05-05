@@ -48,11 +48,11 @@ export function AlternativeImplementation({
         </Button>
       </div>
 
-      <p className="text-sm text-slate-300 mb-4">{description}</p>
+      <p className="text-sm text-slate-200 mb-4">{description}</p>
 
       <div className="mb-4">
         <pre className="bg-slate-950 rounded-lg p-4 overflow-x-auto border border-slate-700">
-          <code className="text-sm text-slate-300 font-mono">{code}</code>
+          <code className="text-sm text-slate-200 font-mono">{code}</code>
         </pre>
       </div>
 
@@ -60,7 +60,7 @@ export function AlternativeImplementation({
         <h4 className="text-xs font-semibold text-purple-300 mb-2">
           Trade-offs
         </h4>
-        <p className="text-sm text-slate-200">{tradeoffs}</p>
+        <p className="text-sm text-slate-100">{tradeoffs}</p>
       </div>
     </Card>
   );
